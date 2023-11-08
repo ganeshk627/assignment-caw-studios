@@ -1,0 +1,17 @@
+{
+  "name": "assignment-caw-studios",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:chrome" : "npx playwright test --project=chrome",
+    "test:chrome:headed" : "npx playwright test --headed --project=chrome"
+  },
+  "keywords": [],
+  "author": "https://github.com/ganeshk627",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.9.0"
+  }
+}
