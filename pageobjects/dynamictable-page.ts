@@ -1,11 +1,11 @@
-import { type Locator, type Page, expect} from "@playwright/test";
+import { type Locator, type Page, expect } from "@playwright/test";
 import * as fs from 'fs';
 
 
 export class DynamicTablePage {
 
     //variables
-    protected readonly page:Page;
+    protected readonly page: Page;
     private readonly TEST_DATA_BUTTON: Locator;
     private readonly JSON_DATA_INPUT: Locator;
     private readonly CAPTION_INPUT: Locator;
@@ -16,7 +16,7 @@ export class DynamicTablePage {
 
 
     //constructor
-    constructor (page: Page) {
+    constructor(page: Page) {
         this.page = page;
         this.TEST_DATA_BUTTON = page.getByText('Table Data');
         this.JSON_DATA_INPUT = page.locator('#jsondata');
@@ -39,7 +39,7 @@ export class DynamicTablePage {
     async shrinkTestData() {
         await expect(this.JSON_DATA_INPUT).toBeVisible();
         await this.TEST_DATA_BUTTON.click();
-        await expect(this.JSON_DATA_INPUT).toBeHidden();    
+        await expect(this.JSON_DATA_INPUT).toBeHidden();
     }
 
     async fillJsonData(jsonPath: string) {
@@ -63,14 +63,14 @@ export class DynamicTablePage {
     async assertTableDataWithJson(jsonPath: string) {
         const jsonObject = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
         let rows = await this.DYNAMIC_TABLE.locator('tr').all();
-        for(var i=1; i<rows.length; i++) {
-            expect.soft(jsonObject[i-1].name == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').first().innerText()).toString()).toBeTruthy()
-            expect.soft(jsonObject[i-1].age == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(1).innerText()).toString()).toBeTruthy()
-            expect.soft(jsonObject[i-1].gender == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(2).innerText()).toString()).toBeTruthy()
+        for (var i = 1; i < rows.length; i++) {
+            expect.soft(jsonObject[i - 1].name == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').first().innerText()).toString()).toBeTruthy()
+            expect.soft(jsonObject[i - 1].age == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(1).innerText()).toString()).toBeTruthy()
+            expect.soft(jsonObject[i - 1].gender == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(2).innerText()).toString()).toBeTruthy()
         }
 
         // verify that the the all the json data is populated in table
-        expect(jsonObject[i-1], 'Some data is not populated in table!!!').toBeUndefined()
+        expect(jsonObject[i - 1], 'Some data is not populated in table!!!').toBeUndefined()
     }
 
 }

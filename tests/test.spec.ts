@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import {DynamicTablePage} from '../pageobjects/dynamictable-page';
+import { DynamicTablePage } from '../pageobjects/dynamictable-page';
 
-test('Updating Table Test', async({page})=> {
-      const dynamicTablePage = new DynamicTablePage(page);
-      const jsonPath = 'testdata/dynamic-table/data.json';
-     
+test('Updating Table Test', async ({ page }) => {
+  const dynamicTablePage = new DynamicTablePage(page);
+  const jsonPath = 'testdata/dynamic-table/data.json';
+
   await test.step('Landing Dynamic Table Page', async () => {
     await page.goto('/styled/tag/dynamic-table.html');
   });
@@ -25,5 +25,5 @@ test('Updating Table Test', async({page})=> {
   })
 
 
-  
-  });
+
+});
