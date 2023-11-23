@@ -22,6 +22,7 @@ test('Updating Table Test', async ({ page }) => {
 
   await test.step('The entered data will be populated in the table', async () => {
     await dynamicTablePage.assertTableDataWithJson(jsonPath);
+    // await page.pause()
   })
 
 

@@ -64,9 +64,13 @@ export class DynamicTablePage {
         const jsonObject = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
         let rows = await this.DYNAMIC_TABLE.locator('tr').all();
         for (var i = 1; i < rows.length; i++) {
-            expect.soft(jsonObject[i - 1].name == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').first().innerText()).toString()).toBeTruthy()
-            expect.soft(jsonObject[i - 1].age == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(1).innerText()).toString()).toBeTruthy()
-            expect.soft(jsonObject[i - 1].gender == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(2).innerText()).toString()).toBeTruthy()
+            // expect.soft(jsonObject[i - 1].name == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').first().innerText()).toString()).toBeTruthy()
+            // expect.soft(jsonObject[i - 1].age == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(1).innerText()).toString()).toBeTruthy()
+            // expect.soft(jsonObject[i - 1].gender == (await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(2).innerText()).toString()).toBeTruthy()
+
+            expect.soft(await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').first()).toHaveText(jsonObject[i - 1].name)
+            expect.soft(await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(1)).toHaveText(jsonObject[i -1].age.toString())
+            expect.soft(await this.DYNAMIC_TABLE.locator('tr').nth(i).locator('td').nth(2)).toHaveText(jsonObject[i - 1].gender)
         }
 
         // verify that the the all the json data is populated in table
